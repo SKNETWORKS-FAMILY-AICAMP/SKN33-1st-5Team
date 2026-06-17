@@ -33,7 +33,7 @@ st.markdown("""
 
 /* Reset spacing */
 [data-testid="stSidebarContent"]{
-    padding-top:20px;
+    padding-top:20px;python app.py
 }
 
 /* Button */
@@ -46,6 +46,7 @@ div.stButton > button{
     border:none !important;
 
     width:100%;
+    
 
     padding:15px;
 
