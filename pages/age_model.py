@@ -1,0 +1,85 @@
+
+import streamlit as st
+import pandas as pd
+import plotly.express as px
+import sys
+import os
+
+root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(root)
+sys.path.append(os.path.join(root, "database"))
+
+from sidebar_utils import render_sidebar
+from query import get_top_models_by_age_group
+
+st.set_page_config(page_title="연령대별 선호 모델 순위 | Domestic Car Sales", layout="wide")
+
+render_sidebar(active_section="age", active_menu="선호 모델 순위")
+
+st.markdown('<div style="font-size:3.5rem;font-weight:800;line-height:1.2;color:rgba(255,255,255,0.95);margin-bottom:0.5rem;">🚗 연령대별 선호 모델 순위</div>', unsafe_allow_html=True)
+st.markdown('<div style="color:rgba(255,255,255,0.45);font-size:1rem;margin-bottom:1rem;">연령대별로 선호하는 모델 순위와 판매량을 확인합니다.</div>', unsafe_allow_html=True)
+st.divider()
+
+# 표시명 → DB 저장값 매핑 ("20대"는 DB에 "20대 이하"로 저장)
+AGE_DISPLAY = ["20대", "30대", "40대", "50대", "60대", "70대 이상"]
+AGE_DB_MAP  = {
+    "20대": "20대 이하",
+    "30대": "30대",
+    "40대": "40대",
+    "50대": "50대",
+    "60대": "60대",
+    "70대 이상": "70대 이상",
+}
+
+main_col, _ = st.columns([3, 2])
+
+with main_col:
+    age_display = st.radio("연령대 선택", AGE_DISPLAY, index=None, horizontal=True)
+    st.divider()
+
+    if age_display is None:
+        st.info("📌 연령대를 선택하면 선호 모델 순위가 표시됩니다.")
+        st.stop()
+
+    age_group = AGE_DB_MAP[age_display]
+    st.subheader(f"🏅 {age_display} 선호 모델 TOP 10 (판매량 기준)")
+
+    try:
+        data = get_top_models_by_age_group(age_group, limit=10)
+        if data:
+            df = pd.DataFrame(data)[["model_name", "brand_name", "age_reg_count"]]
+            df.columns = ["모델", "브랜드", "판매량"]
+            df = df.groupby(["모델", "브랜드"], as_index=False)["판매량"].max()
+            df = df.sort_values("판매량", ascending=False).reset_index(drop=True)
+            df.insert(0, "순위", range(1, len(df) + 1))
+
+            y_max = df["판매량"].max()
+            fig = px.bar(
+                df, x="모델", y="판매량",
+                color_discrete_sequence=["#AB63FA"],
+                text="판매량",
+            )
+            fig.update_traces(texttemplate="%{text:,}", textposition="outside",
+                              constraintext="none")
+            fig.update_layout(
+                xaxis_tickangle=-30,
+                plot_bgcolor="rgba(0,0,0,0)",
+                paper_bgcolor="rgba(0,0,0,0)",
+                font=dict(color="white"),
+                height=440,
+                showlegend=False,
+                margin=dict(t=40, b=60),
+                yaxis=dict(gridcolor="rgba(255,255,255,0.08)",
+                           range=[0, y_max * 1.18]),
+            )
+            st.plotly_chart(fig, use_container_width=True)
+
+            st.dataframe(
+                df.style.set_properties(**{"text-align": "center"}),
+                use_container_width=True,
+                hide_index=True,
+            )
+        else:
+            st.info("데이터가 없습니다.")
+    except Exception as e:
+        st.error(f"오류: {e}")
