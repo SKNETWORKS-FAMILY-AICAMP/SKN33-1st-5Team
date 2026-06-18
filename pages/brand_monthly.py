@@ -193,22 +193,3 @@ if df_all_monthly:
         st.info("📌 합계를 볼 기간(월)을 선택하세요.")
 
 st.divider()
-
-# # ── 3. 전체 연도 누적 추이 (첫 번째 모델 기준) ──────────────
-# if selected_model_labels:
-#     first_label = selected_model_labels[0]
-#     first_model_id = model_id_map[first_label]
-#     st.subheader(f"📊 {first_label} 전체 연도 월별 등록 추이")
-#     try:
-#         all_data = get_monthly_reg_by_model(first_model_id)
-#         if all_data:
-#             df_cumul = pd.DataFrame(all_data)
-#             df_cumul["연월"] = (df_cumul["year"].astype(str) + "-"
-#                                 + df_cumul["month"].astype(str).str.zfill(2))
-#             df_cumul = df_cumul.set_index("연월")[["monthly_reg_count"]]
-#             df_cumul.columns = ["등록 수"]
-#             st.line_chart(df_cumul)
-#         else:
-#             st.info("데이터가 없습니다.")
-#     except Exception as e:
-#         st.error(f"오류: {e}")

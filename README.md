@@ -12,8 +12,8 @@
 
 ## 👥 협업 및 역할
 
-| 파트 | 담당 내용 |
-| --- | --- |
+| 파트 | 담당 | 내용 |
+| --- | --- | --- |
 | 이양원 | 데이터 수집 | NICE 블루마크, 다나와 자동차, 브랜드 FAQ 데이터 수집 |
 | 이양원 | 데이터 전처리 | CSV 정제, 브랜드/모델명 표준화, 통합 FAQ 생성 |
 | 주상현, 허유나 | DB 설계 | 논리/물리 ERD 작성, MySQL 테이블 설계 |
@@ -35,13 +35,13 @@
 | 구분 | 화면 | 설명 |
 | --- | --- | --- |
 | 메인 | `app.py` | 대시보드 소개 및 분석 메뉴 카드 |
-| 브랜드 분석 | `pages/brand_annual.py` | 연도별 브랜드 등록/판매량 비교 |
-| 브랜드 분석 | `pages/brand_monthly.py` | 브랜드와 모델을 선택해 월별 추이 확인 |
-| 브랜드 분석 | `pages/brand_top10.py` | 전체 또는 브랜드별 모델 TOP 10 확인 |
-| 성별 분석 | `pages/gender_brand.py` | 남성/여성 기준 브랜드 순위 확인 |
-| 성별 분석 | `pages/gender_model.py` | 남성/여성 기준 모델 순위 확인 |
-| 연령대 분석 | `pages/age_brand.py` | 연령대별 브랜드 순위 확인 |
-| 연령대 분석 | `pages/age_model.py` | 연령대별 모델 순위 확인 |
+| 연도별 분석 | `pages/brand_annual.py` | 연도별 브랜드 등록/판매량 비교 |
+| 월별 분석 | `pages/brand_monthly.py` | 브랜드와 모델을 선택해 월별 추이 확인 |
+| TOP 10 분석 | `pages/brand_top10.py` | 전체 또는 브랜드별 모델 TOP 10 확인 |
+| 성별 브랜드 분석 | `pages/gender_brand.py` | 남성/여성 기준 브랜드 순위 확인 |
+| 성별 차종 분석  | `pages/gender_model.py` | 남성/여성 기준 모델 순위 확인 |
+| 연령대별 브랜드 분석 | `pages/age_brand.py` | 연령대별 브랜드 순위 확인 |
+| 연령대별 차종 분석 | `pages/age_model.py` | 연령대별 모델 순위 확인 |
 | FAQ | `pages/faq.py` | 브랜드별 FAQ 키워드 검색 |
 
 ## 개발 진행 순서
@@ -276,6 +276,7 @@ Streamlit pages/ 화면에서 시각화
 | `sidebar_utils.py` | Streamlit 사이드바 메뉴와 페이지 이동 처리 |
 | `pages/` | Streamlit 멀티페이지 분석 화면 |
 | `sql/create_table.sql` | ERD 기준 물리 테이블 생성 SQL |
+
 
 ## 기대 효과
 
