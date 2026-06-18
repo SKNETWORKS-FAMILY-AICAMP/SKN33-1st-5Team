@@ -98,12 +98,12 @@ st.divider()
 
 # ── 검색 실행 ────────────────────────────────────────────────────
 # ── DB 컬럼 확인 (디버그) ─────────────────────────────────────
-with st.expander("🔧 DB 컬럼 확인 (문제 발생 시 펼쳐보세요)", expanded=False):
-    try:
-        schema = get_faq_columns_debug()
-        st.json(schema)
-    except Exception as ex:
-        st.error(f"FAQ 테이블 접근 실패: {ex}")
+# with st.expander("🔧 DB 컬럼 확인 (문제 발생 시 펼쳐보세요)", expanded=False):
+#     try:
+#         schema = get_faq_columns_debug()
+#         st.json(schema)
+#     except Exception as ex:
+#         st.error(f"FAQ 테이블 접근 실패: {ex}")
 
 if not keyword and not search_btn:
     st.markdown("""
