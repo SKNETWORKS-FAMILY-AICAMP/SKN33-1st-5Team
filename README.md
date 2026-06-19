@@ -141,11 +141,11 @@ SKN33-1st-5Team-main/
 
 ### 논리 ERD
 
-![논리 ERD](docs/logical_erd.png)
+<img width="1327" height="833" alt="Image" src="https://github.com/user-attachments/assets/bc4d4fe3-5233-4da7-847d-d6e8f38e5ea0" />
 
 ### 물리 ERD
 
-![물리 ERD](docs/physical_erd.png)
+<img width="2320" height="854" alt="Image" src="https://github.com/user-attachments/assets/5095e5de-a71e-403e-bb64-a4e337a3e0af" />
 
 ## 데이터베이스 설계
 
